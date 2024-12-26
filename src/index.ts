@@ -4,6 +4,11 @@ import { routers } from "./routes/routes";
 import { config } from "../config";
 import rateLimit from "express-rate-limit";
 
+import dotenv from "dotenv";
+
+dotenv.config();
+const PORT = process.env.PORT || 3003;
+
 const app = express();
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
@@ -14,6 +19,6 @@ app.use(json());
 app.use(limiter);
 app.use(routers);
 
-app.listen(config.server.port, () => {
+app.listen(PORT, () => {
   console.log(`SERVER WORKS AT: ${config.server.port}`);
 });
